@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "AE2B76C832DDD43171AD2FB511DB0CA4884610F2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "AE2B76C832DDD43171AD2FB511DB0CA4884610F2" : 0,
+    "46633FC25292AD4270E40F4691C8DA59773539A9" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "600E51A3-6F20-45CD-9611-59115E5934D3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "AE2B76C832DDD43171AD2FB511DB0CA4884610F2" : "SocialNetwork\/",
+    "46633FC25292AD4270E40F4691C8DA59773539A9" : ".."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SocialNetwork",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SocialNetwork.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ZvonimirTaslak\/SocialNetwork.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "46633FC25292AD4270E40F4691C8DA59773539A9"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ZvonimirTaslak\/SocialNetwork.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AE2B76C832DDD43171AD2FB511DB0CA4884610F2"
+    }
+  ]
+}
