@@ -22,6 +22,7 @@
 		F7F459C61D3638E900460A2A /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F459C51D3638E900460A2A /* FBSDKCoreKit.framework */; };
 		F7F459C81D3638EF00460A2A /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F459C71D3638EF00460A2A /* FBSDKLoginKit.framework */; };
 		F7F459CA1D3638F900460A2A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F459C91D3638F900460A2A /* Bolts.framework */; };
+		F7F459CD1D36476900460A2A /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F459CC1D36476900460A2A /* DataService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		F7F459C51D3638E900460A2A /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		F7F459C71D3638EF00460A2A /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		F7F459C91D3638F900460A2A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		F7F459CC1D36476900460A2A /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 		F7A203A01D2692AF0093823E /* SocialNetwork */ = {
 			isa = PBXGroup;
 			children = (
+				F7F459CB1D36473B00460A2A /* Services */,
 				F7A203BF1D26AF3F0093823E /* Util */,
 				F7A203B81D269F0C0093823E /* Resources */,
 				F7A203B71D269EFF0093823E /* Model */,
@@ -165,6 +168,14 @@
 				F7A203C01D26AF510093823E /* Constants.swift */,
 			);
 			name = Util;
+			sourceTree = "<group>";
+		};
+		F7F459CB1D36473B00460A2A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F7F459CC1D36476900460A2A /* DataService.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7A203C51D26B6F60093823E /* MaterialTextField.swift in Sources */,
+				F7F459CD1D36476900460A2A /* DataService.swift in Sources */,
 				F7A203BE1D26ACA60093823E /* MaterialView.swift in Sources */,
 				F7A203A41D2692AF0093823E /* ViewController.swift in Sources */,
 				F7A203A21D2692AF0093823E /* AppDelegate.swift in Sources */,
