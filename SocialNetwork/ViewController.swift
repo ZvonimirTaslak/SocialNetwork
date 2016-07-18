@@ -54,6 +54,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         print("Login faild \(error)")
                     } else {
                         print("Logged in \(authData)")
+                        
+                        let user = ["provider": authData!.providerID, "blah" : "test"]
+                        DataService().createFirebaseUser(authData!.uid, user: user)
+                        
                         NSUserDefaults.standardUserDefaults().setValue(authData!.uid, forKey: KEY_UID)
                         self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                     }
@@ -78,7 +82,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
                         } else {
                             NSUserDefaults.standardUserDefaults().setValue(authData?.uid, forKey: KEY_UID)
-                            FIRAuth.auth()?.signInWithEmail(email, password: pwd, completion: nil)
+                          //  FIRAuth.auth()?.signInWithEmail(email, password: pwd, completion: nil)
+                            
+                            FIRAuth.auth()?.signInWithEmail(email, password: pwd, completion: { (authData, error) in
+                                
+                                let user = ["provider": authData!.providerID, "blah" : "email test"]
+                                DataService().createFirebaseUser(authData!.uid, user: user)
+                                
+                            })
+                           
                             self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                         }
                       })

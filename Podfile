@@ -10,6 +10,7 @@ target 'SocialNetwork' do
   pod ‘Firebase/Auth’
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'Alamofire', '~> 3.4'
 
 end
 

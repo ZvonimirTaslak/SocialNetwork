@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,14 +19,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchImage-1" translatesAutoresizingMaskIntoConstraints="NO" id="msI-Tw-nZW">
-                                <rect key="frame" x="129" y="118" width="343" height="365"/>
+                                <rect key="frame" x="128" y="118" width="344" height="365"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="msI-Tw-nZW" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="4Zm-6b-f8w"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="msI-Tw-nZW" secondAttribute="trailing" constant="108" id="5NR-5y-CaO"/>
+                            <constraint firstItem="msI-Tw-nZW" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="D2T-1X-Mj8"/>
+                            <constraint firstItem="msI-Tw-nZW" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Kaw-6p-g9b"/>
+                            <constraint firstItem="msI-Tw-nZW" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="108" id="QWm-KN-GW8"/>
+                            <constraint firstItem="msI-Tw-nZW" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="XG7-dN-SwL"/>
                             <constraint firstItem="msI-Tw-nZW" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="aoH-Dj-4Ea"/>
                             <constraint firstItem="msI-Tw-nZW" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="yzV-bh-cnF"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="4Zm-6b-f8w"/>
+                                <exclude reference="Kaw-6p-g9b"/>
+                                <exclude reference="aoH-Dj-4Ea"/>
+                                <exclude reference="yzV-bh-cnF"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
