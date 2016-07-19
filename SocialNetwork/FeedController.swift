@@ -8,11 +8,19 @@
 
 import UIKit
 import Firebase
+import Alamofire
 
-class FeedController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FeedController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet var postField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     var posts = [Post]()
+    @IBOutlet var imageSelectorImg: UIImageView!
+    
+    var imagePicker: UIImagePickerController!
+    var imageSelected = false
+    
+    
     static var imaheCache = NSCache()
     
     override func viewDidLoad() {
@@ -22,12 +30,16 @@ class FeedController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.dataSource = self
         
         tableView.estimatedRowHeight = 358
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
         
         DataService().posts.observeEventType( .Value, withBlock:  { snapshot in
+            
             print(snapshot.value)
             
             self.posts = []
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+              
                 
                 for snap in snapshots {
                     print("Snap: \(snap)")
@@ -87,5 +99,133 @@ class FeedController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return tableView.estimatedRowHeight
         }
     }
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        imagePicker.dismissViewControllerAnimated(true, completion: nil)
+        imageSelectorImg.image = image
+        imageSelected = true
+    }
+    
+    @IBAction func selectImage(sender: UITapGestureRecognizer) {
+        presentViewController(imagePicker,
+                              animated: true,
+                              completion: nil)
+        
+            }
+    
+    @IBAction func makePost(sender: AnyObject) {
+        
+        if let txt = postField.text where txt != ""{
+            if let img = imageSelectorImg.image where imageSelected == true{
+                let urlStr = "https://post.imageshack.us/upload_api.php"
+                let url = NSURL(string: urlStr)!
+                let imgData = UIImageJPEGRepresentation(img, 0.2)!
+                let keyData = "7AEIJLVX5c5f077f49ebac302b1e7446699f460c".dataUsingEncoding(NSUTF8StringEncoding)!
+                let keyJson = "json".dataUsingEncoding(NSUTF8StringEncoding)!
+                
+                Alamofire.upload(.POST, url, multipartFormData: { multipartFormData in
+                    multipartFormData.appendBodyPart(data: imgData, name: "fileupload", fileName: "image", mimeType: "image/jpg")
+                    multipartFormData.appendBodyPart(data: keyData, name: "key")
+                    multipartFormData.appendBodyPart(data: keyJson, name: "format")
+                }) { encodingResult in
+                    
+                    switch encodingResult {
+                    case .Success(let upload, _, _):
+                        
+                        upload.responseJSON(completionHandler: { response in
+                            if let info = response.result.value as? Dictionary<String, AnyObject> {
+                                
+                                if let links = info["links"] as? Dictionary<String,AnyObject> {
+                                    if let imgLink = links["image_link"] as? String {
+                                        print("Link: \(imgLink)")
+                                        self.postToFirebase(imgLink)
+                                    }
+                                }
+                            }
+                        })
+                    case .Failure(let error):
+                        print(error)
+                        
+                    }
+                }
+            } else {
+                self.postToFirebase(nil)
+            }
+            
+        }
+    }
+    
+    func postToFirebase(imgUrl: String?) {
+        var post: Dictionary<String, AnyObject> = ["description": postField.text!, "likes": 0]
+        
+        if imgUrl != nil {
+            post["imageURL"] = imgUrl!
+        }
+        
+        
+        let firebasePost = DataService().posts.childByAutoId()
+        firebasePost.setValue(post)
+        
+        postField.text = ""
+        imageSelectorImg.image = UIImage(named: "Camera")
+        imageSelected = false
+        
+        tableView.reloadData()
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
