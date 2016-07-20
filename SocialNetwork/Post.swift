@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
 class Post {
     
@@ -15,6 +16,7 @@ class Post {
     private var _likes: Int!
     private var _username: String!
     private var _postKey: String!
+    private var _postRef: FIRDatabaseReference!
     
     
     var postDescription: String {
@@ -52,5 +54,17 @@ class Post {
         if let desc = dictionary["description"] as? String {
             self._postDescripton = desc
         }
+        self._postRef = DataService().posts.child(self._postKey)
+    }
+    
+    func adjustLikes(addLike: Bool) {
+    
+        if addLike == true {
+            _likes = _likes + 1
+        } else {
+            _likes = _likes - 1
+        }
+        
+        _postRef.child("likes").setValue(_likes)
     }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import FirebaseDatabase
 
 class PostCell: UITableViewCell {
     
@@ -15,13 +16,18 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var showcaseImg: UIImageView!
     @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var likesLbl: UILabel!
+    @IBOutlet weak var likeBtn: UIImageView!
     
     var post: Post!
     var request: Request?
-    
+    var likeRef = FIRDatabaseReference()
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(PostCell.likeTapper))
+        tap.numberOfTapsRequired = 1
+        likeBtn.addGestureRecognizer(tap)
+        likeBtn.userInteractionEnabled = true
     }
     
     override func drawRect(rect: CGRect) {
@@ -33,6 +39,8 @@ class PostCell: UITableViewCell {
     
     func configureCell(post: Post, img: UIImage?){
         self.post = post
+        
+        self.likeRef = DataService().REF_USER_COURENT.child("likes").child(post.postKey)
         
 
         self.descriptionText.text = post.postDescription
@@ -57,5 +65,52 @@ class PostCell: UITableViewCell {
             self.showcaseImg.hidden = true
         }
         
+        
+        likeRef.observeSingleEventOfType(.Value, withBlock: {snapshot in
+        
+            if let doesNotExist = snapshot.value as? NSNull {
+                self.likeBtn.image = UIImage(named: "dislike-1")
+            } else {
+                self.likeBtn.image = UIImage(named: "like-1")
+            }
+        })
+        
     }
+    
+    func likeTapper() {
+        print("like pressed")
+        
+        
+        likeRef.observeSingleEventOfType(.Value, withBlock: {snapshot in
+            
+            if let doesNotExist = snapshot.value as? NSNull {
+                self.likeBtn.image = UIImage(named: "like-1")
+                self.post.adjustLikes(true)
+                self.likeRef.setValue(true)
+            } else {
+                self.likeBtn.image = UIImage(named: "dislike-1")
+                self.post.adjustLikes(false)
+                self.likeRef.removeValue()
+            }
+        })
+    
+
+    }
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

@@ -20,6 +20,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.emailField.delegate = self
         self.password.delegate = self
     }
 
@@ -86,7 +87,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             
                             FIRAuth.auth()?.signInWithEmail(email, password: pwd, completion: { (authData, error) in
                                 
-                                let user = ["provider": authData!.providerID, "blah" : "email test"]
+                                let user = ["provider": authData!.providerID, "email" : "\(authData?.email)"]
                                 DataService().createFirebaseUser(authData!.uid, user: user)
                                 
                             })

@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import Alamofire
 
-class FeedController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class FeedController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate,  UITextFieldDelegate {
 
     @IBOutlet var postField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -25,6 +25,8 @@ class FeedController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.postField.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -174,25 +176,17 @@ class FeedController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
+    @IBAction func logoutBtn(sender: AnyObject) {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(KEY_UID)
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
     
     
     
